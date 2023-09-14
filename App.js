@@ -71,15 +71,32 @@
 //   },
 // });
 
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet,
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import { useState } from "react";
 
 export default function App() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      behavior="padding"
+      keyboardVerticalOffset={Platform.OS === "android" ? 0 : 100}
+      style={styles.container}
+    >
       <View style={styles.form}>
+        <Image
+          source={require("./assets/adaptive-icon.png")}
+          style={styles.image}
+        />
         <Text style={styles.label}>UserName</Text>
         <TextInput
           style={styles.input}
@@ -97,7 +114,7 @@ export default function App() {
         />
         <Button title="Login" onPress={() => {}} />
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -133,5 +150,11 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     padding: 10,
     borderRadius: 5,
+  },
+  image: {
+    width: 200,
+    height: 200,
+    alignSelf: "center",
+    marginBottom: 50,
   },
 });
